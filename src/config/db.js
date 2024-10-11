@@ -10,3 +10,4 @@ const pool = mysql.createPool({
     database:process.env.DB_NAME,
 });
 
+module.exports=pool;                        // Export the pool for use in other modules
