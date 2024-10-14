@@ -7,7 +7,7 @@ fastify.post('/register', async (request, reply) => {
     const { username, email, password, phone_number, address } = request.body;              // Get user data from request body
 
 // Hash the password for security
-const hasedPassword = await.bcrypt.hash(password, 10);
+const hasedPassword = await bcrypt.hash(password, 10);
 
 // Call creteUSer to insert User Data into the Database
 createUser({ username, email, password: hasedPassword, phone_number, address, role: 'Customer' }, (err, result) => {
