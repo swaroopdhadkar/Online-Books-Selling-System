@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE registeredusers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -7,3 +7,4 @@ CREATE TABLE users (
     address VARCHAR(255),
     role ENUM('Customer', 'Admin') DEFAULT 'Customer'
 );
+Create Table 
