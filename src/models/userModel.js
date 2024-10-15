@@ -1,15 +1,37 @@
-const db = require('../config/db');                         // Import the DB Pool
+// User Schema Definition
 
-const createUser = (userData, callback) => {                                                // Funtion to create new User
-    const { username, email, password, phone_number, address, role} = userData ;            // User data destucture
-    const sql = 'INSERT INTO users ( username, password, phone_number, address, role) VALUES (?, ?, ?, ?, ?, ?) ';              // SQL Query to insert new users
+const user = {
+    username: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        lowercase:true
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 6
+    },
+    phone_number: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    role: {
+        type: String,
+        enum: ['user', 'admin'],
+        default: 'user'
+    }
 
-    db.query( sql, [username, email, password, phone_number, address, role], (err, result) => {
-        if (err) return callback(err);                                                                 // Return error if it occurs
-        return callback(null, result);                                                                 // Return the result is successful
-    });
+}
 
-
-};
-
-module.exports = { createUser };                                                                        // Exporting the createUser Function
+module.exports = user;
