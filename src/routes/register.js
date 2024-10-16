@@ -6,7 +6,7 @@ async function registerUser(request, reply) {
     const { username, email, password, phone_number, address } = request.body ;
 
 
-if( !username || !email || !password ) {                                                        // Validate input
+if( !username || !email || !password || !phone_number ||!address ) {                                                        // Validate input
     return reply.status(400).send({ message : 'Username, Email and Password are required'})
 }
 
