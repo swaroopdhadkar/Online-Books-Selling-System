@@ -1,9 +1,19 @@
 const fastify = require('fastify') ({ logger : true});
+const { registerMiddleware, connectToDatabase, registerRoutes } = require('./config/server')
 
 fastify.get ('/', async(request,reply) => {
     return { message : 'Welcome to the Online Books Selling System'}
 })
 // Response for GET method , GET endpoint for the root path
+
+// Register Middleware
+registerMiddleware(fastify);
+
+// Connect to the Database
+connectToDatabase(fastify);
+
+// Register Routes
+registerRoutes(fastify);
 
 const start = async () => {
     try {
