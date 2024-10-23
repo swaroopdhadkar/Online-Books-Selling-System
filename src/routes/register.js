@@ -7,7 +7,7 @@ async function registerUser(request, reply) {
     const { username, email, password, phone_number, address } = request.body ;
 
 
-if( !username || !email || !password ) {                                                        // Validate input
+if( !username || !email || !password || !phone_number ||!address ) {                                                        // Validate input
     return reply.status(400).send({ message : 'Username, Email and Password are required'})
 }
 
@@ -34,12 +34,4 @@ try{
 
 }
 
-// Define the registerRoutes function to register the route
-async function registerRoutes(fastify) {
-    fastify.post('/register', registerUser);
-}
-
-
-
-// Export the registerRouts function directly
-module.exports = registerRoutes;                                                    // Export the function directlyr
+module.exports = { registerUser };                                                  // Export function to use in Routes
