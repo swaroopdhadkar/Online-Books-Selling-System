@@ -1,4 +1,5 @@
-const { User, username, email, password, phone_number, address } = require('../models/userModel');              // Import createUser function
+const User  = require('../models/userModel');                            // Import User Model
+const userService = require('../services/userService');
 const bcrypt = require('bcrypt');
 const fastify = require('fastify') ();                              // Creating new Fastify instance
 
@@ -21,12 +22,24 @@ const newUser = new User({                                                  // C
 });
 
 try{
-    await newUser.save();                                                           // Save new user in database
-    reply.status(201).send({ message: 'User Registered Successfully!'});
+    // Use the service to save the User to the Database
+    const result= await userService.createUser(newUser);
+
+    // Success response
+    reply.status(201).send({ message: 'Registered Successfully!'});
 } catch(error){
-    reply.status(500).send({ message: 'Error registering user', error});
+    console.error("Error details:", error);
+    reply.status(500).send({ message: 'Error registering user', error: error.message || error});
 }
 
 }
 
-module.exports = { registerUser };                                                  // Export function to use in Routes
+// Define the registerRoutes function to register the route
+async function registerRoutes(fastify) {
+    fastify.post('/register', registerUser);
+}
+
+
+
+// Export the registerRouts function directly
+module.exports = registerRoutes;                                                    // Export the function directlyr

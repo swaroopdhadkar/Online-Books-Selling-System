@@ -1,37 +1,13 @@
-// User Schema Definition
-
-const user = {
-    username: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase:true
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 6
-    },
-    phone_number: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    address: {
-        type: String,
-        required: true
-    },
-    role: {
-        type: String,
-        enum: ['user', 'admin'],
-        default: 'user'
+class User{
+    constructor({ username, email, password, phone_number, address, role = 'user'}){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.role = role;
+        // Default value of role is 'user', if not provided.
     }
-
 }
 
-module.exports = user;
+module.exports = User;
