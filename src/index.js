@@ -9,14 +9,16 @@ fastify.get ('/', async(request,reply) => {
 // Register Middleware
 registerMiddleware(fastify);
 
-// Connect to the Database
-connectToDatabase(fastify);
-
-// Register Routes
-registerRoutes(fastify);
-
 const start = async () => {
     try {
+
+        // Connect to the Database
+        await connectToDatabase(fastify);
+
+        // Register routes after successful Database Connection
+        registerRoutes(fastify)
+
+
         await fastify.listen({ port : 3000 });                                             // Listen on PORT 3000
         console.log('Server is running at http://localhost:3000');             // Log the server URL
     } catch(err) {                                                               // Catch any error during server startup and log them
