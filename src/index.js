@@ -16,7 +16,7 @@ const start = async () => {
         await connectToDatabase(fastify);
 
         // Register routes after successful Database Connection
-        registerRoutes(fastify)
+        await registerRoutes(fastify);
 
 
         await fastify.listen({ port : 3000 });                                             // Listen on PORT 3000

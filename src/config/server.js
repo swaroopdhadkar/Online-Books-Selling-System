@@ -1,6 +1,6 @@
 const fastifyCors = require('@fastify/cors');               // Import the new @fastify/cors package
 const fastifyFormbody = require('@fastify/formbody');       // Import the fastify formbody plugin (for parsing request bodies)
-const db = require('./db');                                 // Database connection
+const db = require('../config/db');                                 // Database connection
 const userRoutes = require('../routes/register');
 
 async function registerMiddleware(fastify){                     // Function to set up Middleware
