@@ -13,19 +13,19 @@ const verifyAdmin = async (request, reply) => {
     const [admin] = await db.query('SELECT * FROM Admins WHERE email = ?', [email]);
 
 
-    // Check if an admin record with this email was found
+
     if (!admin || admin.length === 0) {
       console.log("No admin found with the provided email.");
       return reply.status(403).send({ error: 'Invalid admin credentials' });
     }
 
-    // Retrieve the hashed password from the result
+
     const storedHashedPassword = admin[0].passwords;
 
 
-    // Compare the provided password with the hashed password in the database
+
     const passwordMatch = await bcrypt.compare(passwords, storedHashedPassword);
-    console.log("Password match result:", passwordMatch);
+    
 
     if (!passwordMatch) {
       console.log("Password does not match.");

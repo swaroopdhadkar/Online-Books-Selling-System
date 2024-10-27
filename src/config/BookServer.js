@@ -6,7 +6,6 @@ require('dotenv').config();
 
 const fastify = require('fastify')({ logger: true });
 const { pool } = require('../config/db');  
-// const db = require('../config/db');
 const { verifyAdmin } = require('../middlewares/adminMiddlewares');  
 
 
