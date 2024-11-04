@@ -11,10 +11,14 @@ async function createUser(user) {
     const values = [ username, email, password, phone_number, address, userRole];
 
     try {
+
         const [result] = await db.query(query, values);
         return { id:result.insertId, username, email, phone_number, address, role: userRole};
+
     } catch (error) {
+
         throw error;
+
     }
 
 }
@@ -33,11 +37,29 @@ async function getUserByEmail(email) {
 
     }
 
-}    
+}
+
+async function getUserById(userId) {
+
+    try {
+
+        const [rows] = await db.query( 'SELECT * FROM users WHERE id = ?', [userId]);
+        return rows[0];
+
+    } catch (error) {
+
+        console.error('Database error:', error);
+        throw new Error('Database query failed');
+
+    }
+
+}
+
 
 
 
 module.exports = { 
     createUser,
-    getUserByEmail
+    getUserByEmail,
+    getUserById
 };
