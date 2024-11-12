@@ -4,14 +4,18 @@ const db = require('../config/db');                                             
 const userRoutes = require('../routes/register');
 const loginRoutes = require('../routes/login');
 const profileRoutes = require('../routes/profile');
+const bookRoutes = require('../routes/bookRoutes.js');
 
 async function registerMiddleware(fastify){                                                              // Function to set up Middleware
+    
     fastify.register(fastifyCors, {
         origin:true
+
     });
 
     // Registerbody parser middleware for handling request body data
     fastify.register(fastifyFormbody);
+
 }
 
 async function connectToDatabase(fastify) {                                                                   // function to connect to the Database
@@ -35,6 +39,7 @@ async function registerRoutes(fastify) {                                        
     fastify.register(userRoutes);
     fastify.register(loginRoutes);                                                                             // Register the User Registration Route
     fastify.register(profileRoutes);
+    fastify.register(bookRoutes);
 
 }
 
