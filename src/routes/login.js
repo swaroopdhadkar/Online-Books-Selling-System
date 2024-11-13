@@ -31,7 +31,7 @@ async function loginUserRoutes(fastify, options) {
 
             // Generate a JWT Token
             const token = jwt.sign(
-                { id: user.id, role: user.role},
+                { id: user.id, role: user.role,username: user.username},
                 process.env.JWT_SECRET,
                 { expiresIn: '1h' }
             );
