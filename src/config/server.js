@@ -5,6 +5,8 @@ const userRoutes = require('../routes/register');
 const loginRoutes = require('../routes/login');
 const profileRoutes = require('../routes/profile');
 const bookRoutes = require('../routes/bookRoutes.js');
+const cartRoutes = require('../routes/cartRoutes');
+const orderRoutes = require('../routes/orderRoutes');
 
 async function registerMiddleware(fastify){                                                              // Function to set up Middleware
     
@@ -40,6 +42,8 @@ async function registerRoutes(fastify) {                                        
     fastify.register(loginRoutes);                                                                             // Register the User Registration Route
     fastify.register(profileRoutes);
     fastify.register(bookRoutes);
+    fastify.register(cartRoutes);
+    fastify.register(orderRoutes);
 
 }
 

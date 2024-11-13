@@ -20,3 +20,22 @@ CREATE TABLE books (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+
+CREATE TABLE Carts (
+    cartId INT PRIMARY KEY AUTO_INCREMENT,
+    userId INT,
+    sessionId VARCHAR(255),
+    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(userId) ON DELETE SET NULL
+);
+    
+CREATE TABLE Orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    userId INT, -- NULL if guest user
+    total_price DECIMAL(10, 2) ,
+    shipping_address VARCHAR(255) NOT NULL,
+    order_status ENUM('Pending', 'Shipped', 'Delivered', 'Cancelled') DEFAULT 'Pending',
+    payment_method ENUM('COD', 'Credit Card', 'Debit Card', 'Net Banking') NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (userId) REFERENCES users(userId)
+);    
